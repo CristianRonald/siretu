@@ -1,0 +1,23 @@
+<<<<<<< HEAD
+logging:
+  level:
+    org.springframework.security: INFO
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+=======
+logging:
+  level:
+    org.springframework.security: INFO
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+>>>>>>> 846f88161ea4aaf513941fd9b73c382eacd7b663

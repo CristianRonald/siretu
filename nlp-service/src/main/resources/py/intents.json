@@ -1,0 +1,74 @@
+{
+  "intents": [
+    {
+      "tag": "saludo",
+      "patterns": ["Hola", "Buenos días", "¿Qué tal?", "Buenas tardes", "¿Cómo estás?"],
+      "context": ""
+    },
+    {
+      "tag": "buscar_lugar_por_ciudad",
+      "patterns": [
+        "¿Qué puedo visitar en Cusco?",
+        "Lugares turísticos de Arequipa",
+        "Qué ver en Lima",
+        "Atracciones en Trujillo"
+      ],
+      "context": "ciudad"
+    },
+    {
+      "tag": "buscar_lugar_por_interes",
+      "patterns": [
+        "Recomiéndame lugares para hacer senderismo",
+        "Dónde puedo ver arte colonial",
+        "Lugares para fotos arquitectónicas"
+      ],
+      "context": "interes"
+    },
+    {
+      "tag": "buscar_lugar_por_actividad",
+      "patterns": [
+        "Quiero ir a la playa",
+        "Busco un museo interactivo",
+        "Dónde hacer canopy"
+      ],
+      "context": "actividad"
+    },
+    {
+      "tag": "buscar_lugar_por_tiempo",
+      "patterns": [
+        "Qué hacer un fin de semana en Lima",
+        "Plan de un día en Cusco",
+        "Actividades para 3 días en Arequipa"
+      ],
+      "context": "tiempo"
+    },
+    {
+      "tag": "consultar_eventos",
+      "patterns": [
+        "¿Hay festivales en julio en Arequipa?",
+        "Eventos culturales este mes",
+        "Ferias gastronómicas próximas"
+      ],
+      "context": "eventos"
+    },
+    {
+      "tag": "preguntar_clima",
+      "patterns": [
+        "¿Hace calor en Trujillo?",
+        "Cómo está el clima en Cusco",
+        "Va a llover en Lima"
+      ],
+      "context": "clima"
+    },
+    {
+      "tag": "agradecimiento",
+      "patterns": ["Gracias", "Muy amable", "Te lo agradezco", "Muchas gracias"],
+      "context": ""
+    },
+    {
+      "tag": "despedida",
+      "patterns": ["Chao", "Hasta luego", "Nos vemos", "Adiós", "Hasta pronto"],
+      "context": ""
+    }
+  ]
+}

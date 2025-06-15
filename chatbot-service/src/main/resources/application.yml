@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: chatbot-service
+  config:
+    import: "optional:configserver:http://config:8888"
+  cloud:
+    config:
+      uri: http://config:8888
+      fail-fast: false
+      username: user
+      password: ${CONFIG_SERVICE_PASSWORD}
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    instance-id: chatbot-service:8080
+    prefer-ip-address: true
+

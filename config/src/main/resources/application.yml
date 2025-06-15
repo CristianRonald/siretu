@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/shared  # Busca configs en /resources/shared/
+  profiles:
+    active: native  # Perfil para modo "native" (archivos locales)
+  security:
+    user:
+      password: ${CONFIG_SERVICE_PASSWORD}  # Contraseña desde variables de entorno
+
+server:
+  port: 8888  # ✔️ Puerto expuesto
