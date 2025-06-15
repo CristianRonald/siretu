@@ -1,13 +1,13 @@
-package com.siretu.service_sugerencias;
+package com.siretu.sugerenciasservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServiceSugerenciasApplication {
+public class SugerenciasServiceApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(ServiceSugerenciasApplication.class, args);
+    SpringApplication.run(SugerenciasServiceApplication.class, args);
   }
 
 }
