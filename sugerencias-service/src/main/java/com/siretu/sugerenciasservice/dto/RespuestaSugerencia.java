@@ -1,39 +1,21 @@
-<<<<<<< HEAD
-package com.siretu.service_sugerencias.dto;
+package com.siretu.sugerenciasservice.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
-/**
- * RespuestaSugerencia
- */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class RespuestaSugerencia {
-
-  private String ciudad;
-  private String tema;
-
-}
-=======
-package com.siretu.service_sugerencias.dto;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.siretu.sugerenciasservice.model.Sugerencia;
 
 /**
  * RespuestaSugerencia
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class RespuestaSugerencia {
 
-  private String ciudad;
-  private String tema;
+  List<Sugerencia> sugerencias;
 
+  public List<Sugerencia> getSugerencias() {
+    return this.sugerencias;
+  }
+
+  public void setSugerencias(List<Sugerencia> sugerencias) {
+    this.sugerencias = sugerencias;
+  }
 }
->>>>>>> 846f88161ea4aaf513941fd9b73c382eacd7b663
