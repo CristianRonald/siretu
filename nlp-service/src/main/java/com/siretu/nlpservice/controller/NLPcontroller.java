@@ -7,10 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.siretu.nlpservice.dto.NLPrequest;
 import com.siretu.nlpservice.dto.NLPresponse;
+import com.siretu.nlpservice.service.Embedding;
 import com.siretu.nlpservice.service.IntentClassifier;
 
 @RestController
@@ -20,9 +24,22 @@ public class NLPcontroller {
   @Autowired
   IntentClassifier IntentClassifier;
 
+  @Autowired
+  Embedding embedding;
+
   @GetMapping
   public String verificar() {
     return "hola";
+  }
+
+  @PostMapping
+  public ResponseEntity<?> getEmbedding(@RequestBody NLPrequest nlPrequest) {
+    try {
+      return ResponseEntity.ok(embedding.generateEmbedding(nlPrequest));
+    } catch (IOException e) {
+      System.out.println(e.getMessage());
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el embedding\n\n" + e.getMessage());
+    }
   }
 
   @GetMapping(path = "{text}")
