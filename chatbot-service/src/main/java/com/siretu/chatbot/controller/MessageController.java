@@ -11,15 +11,13 @@ import com.siretu.chatbot.service.MessageService;
 import com.siretu.chatbot.dto.MessageDto;
 
 @RestController
-@RequestMapping("/ask")
+@RequestMapping("/api/v2/ask")
 public class MessageController {
   @Autowired
   MessageService messageService;
 
-  // private final SugerenciasClient sugerenciasClient;
-
   @PostMapping
-  public void recieveMessage(@RequestBody MessageDto message) {
-    messageService.recieveMessage(message);
+  public String recieveMessage(@RequestBody MessageDto message) {
+    return messageService.recieveMessage(message);
   }
 }

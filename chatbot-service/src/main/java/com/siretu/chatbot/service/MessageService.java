@@ -11,7 +11,8 @@ public class MessageService {
     return message.strip();
   }
 
-  public void recieveMessage(MessageDto message) {
+  public String recieveMessage(MessageDto message) {
 
+    return message.getMessage();
   }
 }

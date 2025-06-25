@@ -11,18 +11,8 @@
 	<groupId>com.siretu</groupId>
 	<artifactId>user-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
-=======
 	<name>user_service</name>
 	<description>Miccoservicio usuario.</description>
->>>>>>> rescate-nlp
-=======
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
->>>>>>> 846f88161ea4aaf513941fd9b73c382eacd7b663
 	<url/>
 	<licenses>
 		<license/>
@@ -40,50 +30,8 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.5</spring-cloud.version>
 	</properties>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 846f88161ea4aaf513941fd9b73c382eacd7b663
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-<<<<<<< HEAD
-=======
   <dependencies>
-    <dependency>
+     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
@@ -130,9 +78,6 @@
         <version>2.2</version>
     </dependency>
   </dependencies>
->>>>>>> rescate-nlp
-=======
->>>>>>> 846f88161ea4aaf513941fd9b73c382eacd7b663
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -147,18 +92,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

@@ -32,7 +32,6 @@ public class Scrapping {
       return sg;
     }
     Elements as = element.select("a");
-    System.out.println(link);
     for (Element a : as) {
       if (!a.attribute("href").getValue().contains("destino"))
         continue;

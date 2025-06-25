@@ -1,3 +1,13 @@
+server:
+  port: 8091
+eureka:
+  instance:
+    hostname: localhost
+  client: 
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
 spring:
   application:
-    name: sugerencias-service
+    name: sugerencia
+  config:
+    import: optional:configserver:http://localhost:8888

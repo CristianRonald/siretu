@@ -1,92 +1,28 @@
-<<<<<<< HEAD
 services:
-<<<<<<< HEAD
-=======
   chatbot-service:
     image: chatbot-service:1.0
     build:
       context: ./chatbot-service
-    depends_on:
-      - eureka-server
-      - config
-
->>>>>>> rescate-nlp
+    ports:
+      - "8090:8090"
+  sugerencias-service:
+    image: sugerencia-service:1.0
+    build:
+      context: ./sugerencias-service
+    ports:
+      - "8091:8091"
+  nlp-service:
+    image: nlp-service:1.0
+    build:
+      context: ./nlp-service
+    ports:
+      - "8093:8093"
   eureka-server:
     image: eureka-server:1.0
     build:
       context: ./eureka-server
     ports:
       - "8761:8761"
-
-  config:
-    image: config:1.0
-    build:
-      context: ./config
-    ports:
-      - "8888:8888"
-    depends_on:
-      - eureka-server
-    links:
-      - eureka-server
-    restart: on-failure
-
-  gateway:
-    image: gateway:1.0
-    build:
-      context: ./gateway
-    ports:
-      - "4000:4000"
-    depends_on:
-      - eureka-server
-      - config
-    environment:
-      - CONFIG_SERVICE_PASSWORD=${CONFIG_SERVICE_PASSWORD}
-
-
-networks:
-<<<<<<< HEAD
-  micro-net:
-    driver: bridge
-=======
-  default:
-    driver: bridge
-    name: turismo-net
->>>>>>> rescate-nlp
-=======
-services:
-  eureka-server:
-    image: eureka-server:1.0
-    build:
-      context: ./eureka-server
-    ports:
-      - "8761:8761"
-
-  config:
-    image: config:1.0
-    build:
-      context: ./config
-    ports:
-      - "8888:8888"
-    depends_on:
-      - eureka-server
-    links:
-      - eureka-server
-    restart: on-failure
-
-  gateway:
-    image: gateway:1.0
-    build:
-      context: ./gateway
-    ports:
-      - "4000:4000"
-    depends_on:
-      - eureka-server
-      - config
-    environment:
-      - CONFIG_SERVICE_PASSWORD=${CONFIG_SERVICE_PASSWORD}
-
-
 networks:
   micro-net:
     driver: bridge
->>>>>>> 846f88161ea4aaf513941fd9b73c382eacd7b663

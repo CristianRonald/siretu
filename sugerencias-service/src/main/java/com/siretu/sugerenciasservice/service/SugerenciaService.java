@@ -19,7 +19,6 @@ public class SugerenciaService {
       RespuestaSugerencia sugerencia = new RespuestaSugerencia();
       scrapping.getLugarTuristico("/destinos/huanuco");
       sugerencia.setSugerencias(scrapping.genFullSugerencias());
-      System.out.println(sugerencia.getSugerencias());
       return sugerencia;
     } catch (IOException e) {
       System.out.println(e.getMessage());
