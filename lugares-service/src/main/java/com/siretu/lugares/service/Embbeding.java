@@ -1,4 +1,4 @@
-package com.siretu.sugerenciasservice.service;
+package com.siretu.lugares.service;
 
 import org.springframework.stereotype.Service;
 

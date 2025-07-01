@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.siretu</groupId>
+  <artifactId>siretu</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <name>siretu</name>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.2.5</version>
+  </parent>
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-dependencies</artifactId>
+      <version>2023.0.1</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+<modules>
+  <module>shared-dto</module>
+  <module>chatbot-service</module>
+  <module>config</module>
+  <module>eureka-server</module>
+  <module>gateway</module>
+  <module>lugares-service</module>
+  <module>nlp-service</module>
+  <module>sugerencias-service</module>
+  <module>user-service</module>
+</modules>
+</project>

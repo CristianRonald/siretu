@@ -11,6 +11,12 @@ services:
       context: ./sugerencias-service
     ports:
       - "8091:8091"
+  lugares-service:
+    image: lugares-service:1.0
+    build:
+      context: ./lugares-service
+    ports:
+      - "8092:8092"
   nlp-service:
     image: nlp-service:1.0
     build:
