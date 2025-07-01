@@ -1,59 +1,47 @@
 package com.siretu.nlpservice.controller;
 
-import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.siretu.nlpservice.dto.NLPrequest;
-import com.siretu.nlpservice.dto.NLPresponse;
-import com.siretu.nlpservice.service.Embedding;
-import com.siretu.nlpservice.service.IntentClassifier;
+import com.siretu.nlpservice.dto.FullLugaresRequest;
+import com.siretu.nlpservice.service.NLPservice;
+
+import com.siretu.shared_dto.dto.LugarDTO;
+import com.siretu.shared_dto.dto.MessageDTO;
 
 @RestController
 @RequestMapping("api/nlp")
 public class NLPcontroller {
 
   @Autowired
-  IntentClassifier IntentClassifier;
-
-  @Autowired
-  Embedding embedding;
-
-  @GetMapping
-  public String verificar() {
-    return "hola";
-  }
+  NLPservice nlPservice;
 
   @PostMapping
-  public ResponseEntity<?> getEmbedding(@RequestBody NLPrequest nlPrequest) {
+  public LugarDTO mostrarLugar(@RequestBody MessageDTO m) {
     try {
-      return ResponseEntity.ok(embedding.generateEmbedding(nlPrequest));
-    } catch (IOException e) {
+      return nlPservice.mostrarLugar(m);
+    } catch (Exception e) {
       System.out.println(e.getMessage());
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el embedding\n\n" + e.getMessage());
+      return null;
     }
   }
 
-  @GetMapping(path = "{text}")
-  public ResponseEntity<?> predictIntent(@PathVariable String text) {
+  @PostMapping("/lugar")
+  public List<LugarDTO> getFullLugares(@RequestBody FullLugaresRequest fr) {
+
     try {
-      NLPresponse response = IntentClassifier.predictiIntent(text);
-      return ResponseEntity.ok(response);
-    } catch (IOException e) {
-      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .body("Error processing request: " + e.getMessage());
-    } catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
-      return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
-          .body("Request interrupted");
+      System.out.println("hola");
+      return nlPservice.getFullLugares(fr.getMessage());
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      return null;
     }
+
   }
+
 }

@@ -1,6 +1,5 @@
 package com.siretu.nlpservice.dto;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,7 +10,7 @@ public class NLPresponse {
   private String intent;
   private double confidence;
   private float[] embedding;
-  private List<Map<String, String>> entities;
+  private Map<String, String> entities;
 
   public String getIntent() {
     return this.intent;
@@ -25,7 +24,7 @@ public class NLPresponse {
     return this.confidence;
   }
 
-  public List<Map<String, String>> getEntities() {
+  public Map<String, String> getEntities() {
     return this.entities;
   }
 
@@ -41,7 +40,7 @@ public class NLPresponse {
     this.confidence = confidence;
   }
 
-  public void setEntities(List<Map<String, String>> entities) {
+  public void setEntities(Map<String, String> entities) {
     this.entities = entities;
   }
 }

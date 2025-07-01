@@ -9,9 +9,7 @@ import java.io.OutputStreamWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.core.io.ClassPathResource;
@@ -71,24 +69,23 @@ public class IntentClassifier {
     NLPresponse nlpResponse = new NLPresponse();
     nlpResponse.setIntent(parts[0]);
     nlpResponse.setConfidence(parts.length > 1 ? Double.parseDouble(parts[1]) : 0);
-    nlpResponse.setEntities(extractEntities(cText));
+    nlpResponse.setEntities(extractEntities(text));
 
     return nlpResponse;
   }
 
-  private List<Map<String, String>> extractEntities(String text) {
+  public Map<String, String> extractEntities(String text) {
     try {
       ClassPathResource inputStream = new ClassPathResource("files/entities.csv");
       BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream.getInputStream()));
       String line;
-      List<Map<String, String>> entities = new ArrayList<>();
+      Map<String, String> entities = new HashMap<>();
       while ((line = reader.readLine()) != null) {
         String[] split = line.split(",");
-        Map<String, String> entitie = new HashMap<>();
-        entitie.put("name", split[0]);
-        entitie.put("tipo", split[1]);
-        if (text.contains(entitie.get("name").replace(" ", "")))
-          entities.add(entitie);
+        if (text.contains(split[0].toLowerCase())) {
+          entities.put(split[1].trim(), split[0].trim());
+          entities.put("tipo", split[2].trim());
+        }
       }
       return entities;
     } catch (Exception e) {

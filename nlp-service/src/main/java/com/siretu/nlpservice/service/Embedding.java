@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.siretu.nlpservice.dto.NLPrequest;
+import com.siretu.shared_dto.dto.MessageDTO;
 
 @Service
 /**
@@ -24,23 +24,36 @@ import com.siretu.nlpservice.dto.NLPrequest;
  */
 public class Embedding {
 
-  public List<Double> generateEmbedding(NLPrequest nlPrequest) throws IOException {
+  public List<Double> generateEmbedding(MessageDTO messageDTO) throws IOException, InterruptedException {
 
-    String texto = nlPrequest.getMessage();
-    Path tempDir = Files.createTempDirectory("nlp_resources");
+    String texto = messageDTO.getMessage();
 
     InputStream pyScript = getClass().getClassLoader().getResourceAsStream("py/embedding.py");
-    Path tempScript = tempDir.resolve("embedding.py");
+    Path tempScript = Files.createTempFile("embedding", ".py");
     Files.copy(pyScript, tempScript, StandardCopyOption.REPLACE_EXISTING);
 
-    ProcessBuilder pb = new ProcessBuilder("py", "embedding.py");
+    ProcessBuilder pb = new ProcessBuilder("python3", tempScript.toAbsolutePath().toString());
     Process proceso = pb.start();
-    OutputStream stdin = proceso.getOutputStream();
-    stdin.write(texto.getBytes(StandardCharsets.UTF_8));
-    stdin.close();
+
+    try (OutputStream stdin = proceso.getOutputStream()) {
+      stdin.write(texto.getBytes(StandardCharsets.UTF_8));
+      stdin.flush();
+    }
 
     BufferedReader reader = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
     String json = reader.lines().collect(Collectors.joining());
+
+    BufferedReader errorReader = new BufferedReader(new InputStreamReader(proceso.getErrorStream()));
+    String errors = errorReader.lines().collect(Collectors.joining("\n"));
+    if (!errors.isEmpty()) {
+      System.err.println("Python error: " + errors);
+    }
+
+    int exitCode = proceso.waitFor();
+    if (exitCode != 0) {
+      throw new RuntimeException("Python script failed with exit code " + exitCode);
+    }
+
     List<Double> vector = new ObjectMapper().readValue(json, new TypeReference<>() {
     });
     return vector;
