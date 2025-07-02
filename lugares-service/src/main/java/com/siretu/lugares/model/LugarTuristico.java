@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +22,7 @@ public class LugarTuristico {
   private String title;
   private String localidad;
   private String tipo;
+  @Lob
   private String descripcion;
 
   @ElementCollection

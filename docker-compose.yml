@@ -5,30 +5,66 @@ services:
       context: ./chatbot-service
     ports:
       - "8090:8090"
+    networks:
+      - micro-net
+
   sugerencias-service:
     image: sugerencia-service:1.0
     build:
       context: ./sugerencias-service
     ports:
       - "8091:8091"
+    networks:
+      - micro-net
+
   lugares-service:
     image: lugares-service:1.0
     build:
       context: ./lugares-service
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/siretu
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
     ports:
       - "8092:8092"
+    networks:
+      - micro-net
+
   nlp-service:
     image: nlp-service:1.0
     build:
       context: ./nlp-service
     ports:
       - "8093:8093"
+    networks:
+      - micro-net
+
   eureka-server:
     image: eureka-server:1.0
     build:
       context: ./eureka-server
     ports:
       - "8761:8761"
+    networks:
+      - micro-net
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: siretu
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - micro-net
+
 networks:
   micro-net:
     driver: bridge
+volumes:
+  postgres_data:
