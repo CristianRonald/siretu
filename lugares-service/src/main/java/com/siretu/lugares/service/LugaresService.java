@@ -26,9 +26,9 @@ public class LugaresService {
   @Autowired
   private LugarTuristicoRepository LugarTuristicoRepository;
 
-  public List<LugarTuristico> procesarTexto(LugaresRequest lr) {
-    // LugaresRequest lr = new LugaresRequest();
-    // lr.setMessage(scrapping.getLugaresFromYtuQuePlanes());
+  public List<LugarTuristico> procesarTexto() {
+    LugaresRequest lr = new LugaresRequest();
+    lr.setMessage(scrapping.getLugaresFromYtuQuePlanes());
     List<ScrappingDTO> scra = lr.getMessage();
     List<LugarTuristico> llt = new ArrayList<>();
     int i = 0;
