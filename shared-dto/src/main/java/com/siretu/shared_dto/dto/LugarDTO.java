@@ -5,17 +5,17 @@ import java.util.List;
 public class LugarDTO {
 
   EntitieDTO entitie;
-  List<Double> embedding;
+  float[] embedding;
 
   public EntitieDTO getEntitie() {
     return this.entitie;
   }
 
-  public List<Double> getEmbedding() {
+  public float[] getEmbedding() {
     return this.embedding;
   }
 
-  public void setEmbedding(List<Double> embedding) {
+  public void setEmbedding(float[] embedding) {
     this.embedding = embedding;
   }
 

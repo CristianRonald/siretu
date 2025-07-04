@@ -26,11 +26,27 @@ public class LugaresService {
   @Autowired
   private LugarTuristicoRepository LugarTuristicoRepository;
 
-  public List<LugarTuristico> procesarTexto() {
-    LugaresRequest lr = new LugaresRequest();
-    lr.setMessage(scrapping.getLugaresFromYtuQuePlanes());
+  public List<ScrappingDTO> getScrapping() {
+    return scrapping.getLugaresFromYtuQuePlanes();
+  }
+
+  public LugarTuristico getOneLugarTuristico(MessageDTO msg) {
+    LugarDTO lugares = nlpClient.mostrarLugar(msg);
+    LugarTuristico lt = new LugarTuristico();
+    lt.setLocalidad(lugares.getEntitie().getLocalidad());
+    lt.setEmbedding(lugares.getEmbedding());
+    lt.setTipo(lugares.getEntitie().getTipo());
+    // lt.setTitle(l.getTitle());
+    // lt.setDescripcion(l.getDescripcion());
+    // LugarTuristicoRepository.save(lt);
+    return lt;
+  }
+
+  public List<LugarTuristico> procesarTexto(LugaresRequest lr) {
+    // List<ScrappingDTO> scra = scrapping.getLugaresFromYtuQuePlanes();
     List<ScrappingDTO> scra = lr.getMessage();
     List<LugarTuristico> llt = new ArrayList<>();
+    System.out.println(scra.size());
     int i = 0;
     for (ScrappingDTO l : scra) {
       i++;
@@ -44,11 +60,16 @@ public class LugaresService {
       lt.setTipo(lugares.getEntitie().getTipo());
       lt.setTitle(l.getTitle());
       lt.setDescripcion(l.getDescripcion());
-      LugarTuristicoRepository.save(lt);
+      LugarTuristicoRepository.insertarLugar(lt, i);
       llt.add(lt);
     }
 
     return llt;
   }
 
+  public List<LugarTuristico> searchLugares(MessageDTO messageDTO) {
+
+    LugarDTO lugar = nlpClient.mostrarLugar(messageDTO);
+    return LugarTuristicoRepository.buscarSimilares(lugar.getEmbedding(), 5);
+  }
 }

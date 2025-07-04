@@ -1,47 +1,28 @@
 package com.siretu.lugares.model;
 
-import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 public class LugarTuristico {
 
   @Id
-  @GeneratedValue
-  private UUID id;
-
+  private Long id;
   private String title;
   private String localidad;
   private String tipo;
   @Lob
+  @Column(name = "descripcion", columnDefinition = "TEXT")
   private String descripcion;
 
-  @ElementCollection
-  @CollectionTable(name = "ubicaciones", joinColumns = @JoinColumn(name = "lugar_id"))
-  @Column(name = "valor")
   private List<String> ubicacion;
 
-  @ElementCollection
-  @CollectionTable(name = "embedding_vector", joinColumns = @JoinColumn(name = "lugar_id"))
-  @Column(name = "value")
-  private List<Double> embedding;
-
-  public UUID getId() {
-    return id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
-  }
+  @Column(name = "embedding", columnDefinition = "vector(384)")
+  private float[] embedding;
 
   public String getLocalidad() {
     return localidad;
@@ -83,11 +64,11 @@ public class LugarTuristico {
     this.ubicacion = ubicacion;
   }
 
-  public List<Double> getEmbedding() {
+  public float[] getEmbedding() {
     return embedding;
   }
 
-  public void setEmbedding(List<Double> embedding) {
+  public void setEmbedding(float[] embedding) {
     this.embedding = embedding;
   }
 }

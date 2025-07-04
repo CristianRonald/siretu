@@ -9,7 +9,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -24,7 +23,7 @@ import com.siretu.shared_dto.dto.MessageDTO;
  */
 public class Embedding {
 
-  public List<Double> generateEmbedding(MessageDTO messageDTO) throws IOException, InterruptedException {
+  public float[] generateEmbedding(MessageDTO messageDTO) throws IOException, InterruptedException {
 
     String texto = messageDTO.getMessage();
 
@@ -54,7 +53,7 @@ public class Embedding {
       throw new RuntimeException("Python script failed with exit code " + exitCode);
     }
 
-    List<Double> vector = new ObjectMapper().readValue(json, new TypeReference<>() {
+    float[] vector = new ObjectMapper().readValue(json, new TypeReference<>() {
     });
     return vector;
   }

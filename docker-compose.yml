@@ -51,7 +51,7 @@ services:
       - micro-net
 
   postgres:
-    image: postgres:15
+    image: ankane/pgvector
     environment:
       POSTGRES_DB: siretu
       POSTGRES_USER: postgres
