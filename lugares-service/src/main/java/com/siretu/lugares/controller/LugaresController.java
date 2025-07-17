@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.siretu.lugares.dto.LugaresRequest;
 import com.siretu.lugares.model.LugarTuristico;
 import com.siretu.lugares.service.LugaresService;
+import com.siretu.shared_dto.dto.LugarTuristicoDTO;
 import com.siretu.shared_dto.dto.MessageDTO;
 import com.siretu.shared_dto.dto.ScrappingDTO;
 
@@ -27,7 +28,7 @@ public class LugaresController {
   }
 
   @PostMapping
-  public List<LugarTuristico> searchLugares(@RequestBody MessageDTO messageDTO) {
+  public List<LugarTuristicoDTO> searchLugares(@RequestBody MessageDTO messageDTO) {
     return lugaresService.searchLugares(messageDTO);
   }
 

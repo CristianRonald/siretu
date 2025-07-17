@@ -8,6 +8,6 @@ eureka:
       defaultZone: http://eureka-server:8761/eureka
 spring:
   application:
-    name: sugerencia
+    name: sugerencias-service
   config:
     import: optional:configserver:http://localhost:8888

@@ -7,6 +7,7 @@ import com.siretu.shared_dto.dto.ScrappingDTO;
 import com.siretu.lugares.model.LugarTuristico;
 
 import com.siretu.shared_dto.dto.LugarDTO;
+import com.siretu.shared_dto.dto.LugarTuristicoDTO;
 import com.siretu.shared_dto.dto.MessageDTO;
 
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class LugaresService {
     return llt;
   }
 
-  public List<LugarTuristico> searchLugares(MessageDTO messageDTO) {
+  public List<LugarTuristicoDTO> searchLugares(MessageDTO messageDTO) {
 
     LugarDTO lugar = nlpClient.mostrarLugar(messageDTO);
     return LugarTuristicoRepository.buscarSimilares(lugar.getEmbedding(), 5);

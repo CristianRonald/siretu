@@ -11,7 +11,7 @@ public class LugarDTO {
     return this.entitie;
   }
 
-  public float[] getEmbedding() {
+  public float[] getEmbedding() { 
     return this.embedding;
   }
 

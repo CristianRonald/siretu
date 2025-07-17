@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import com.pgvector.PGvector;
 import com.siretu.lugares.model.LugarTuristico;
+import com.siretu.shared_dto.dto.LugarTuristicoDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,22 +41,29 @@ public class LugarTuristicoRepositoryImpl implements LugarTuristicoRepositoryCus
   }
 
   @Override
-  public List<LugarTuristico> buscarSimilares(float[] embedding, int limite) {
-    List<LugarTuristico> resultados = new ArrayList<>();
-    System.out.println(embedding);
+  public List<LugarTuristicoDTO> buscarSimilares(float[] embedding, int limite) {
+    List<LugarTuristicoDTO> resultados = new ArrayList<>();
+    PGvector vector = new PGvector(embedding);
     try (Connection conn = datasource.getConnection()) {
       PreparedStatement stmt = conn.prepareStatement(
-          "SELECT title, localidad, tipo, descripcion FROM lugar_turistico ORDER BY embedding <-> ? LIMIT ?");
-      stmt.setObject(1, new PGvector(embedding));
-      stmt.setInt(2, limite);
+          "SELECT title, localidad, tipo, descripcion, embedding <=> ? AS distancia " +
+              "FROM lugar_turistico " +
+              "WHERE embedding <=> ? < ? " +
+              "ORDER BY distancia " +
+              "LIMIT ?");
+      stmt.setObject(1, vector);
+      stmt.setObject(2, vector);
+      stmt.setObject(3, 0.8);
+      stmt.setInt(4, limite);
       ResultSet rs = stmt.executeQuery();
 
       while (rs.next()) {
-        LugarTuristico lt = new LugarTuristico();
+        LugarTuristicoDTO lt = new LugarTuristicoDTO();
         lt.setTitle(rs.getString("title"));
         lt.setTipo(rs.getString("tipo"));
         lt.setDescripcion(rs.getString("descripcion"));
         lt.setLocalidad(rs.getString("localidad"));
+        lt.setDistancia(rs.getFloat("distancia"));
         resultados.add(lt);
       }
     } catch (SQLException e) {
